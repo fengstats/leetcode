@@ -23,16 +23,18 @@
 // Map 解题
 // 思路：通过 Map key 存储第一个数，Map value 存储其下标
 // 通过 for 遍历其余的数（n），通过 target - n 的方式来找找 Map key 有没有对应上的
-// 有，Map 中所存储的下标 + 当前下标返回
+// 有，对应 Map 中所存储的下标 + 当前下标返回
 // 无，以第一个数的方式继续存储，直到找到
 function twoSum(nums: number[], target: number): number[] {
   const len = nums.length
-  const map = new Map<number, number>()
+  const map = new Map<number, any>()
   for (let i = 0; i < len; i++) {
-    const res = map.get(target - nums[i])
-    // NOTE: 第一次写的时候没考虑到可能为 0 的情况没有通过所有 case
-    if (res !== undefined) {
-      return [res, i]
+    const diff = target - nums[i]
+    // NOTE: 第一次写的时候没考虑到可能为 0 的情况没有通过所有 case（这里的 res 为对应 Map 中所存储的下标）
+    // if (res !== undefined) {
+    // NOTE: 通过 has 增加可读性
+    if (map.has(diff)) {
+      return [map.get(diff), i]
     }
     map.set(nums[i], i)
   }
