@@ -5,17 +5,18 @@
  */
 
 // @lc code=start
+// 思路：map 映射
 function containsDuplicate(nums: number[]): boolean {
-  const map = {}
+  const map: { [index: number]: any } = {}
   for (let i = 0; i < nums.length; i++) {
-    map[nums[i]]++
+    const key = nums[i]
+    if (map[key] === undefined) map[key] = 0
+    map[key]++
+    if (map[key] === 2) {
+      return true
+    }
   }
-
-  for (const val of Object.values(map)) {
-    if (Number(val) >= 2) return true
-  }
-
   return false
 }
 // @lc code=end
-containsDuplicate([1, 2, 3, 1])
+console.log(containsDuplicate([1, 2, 3, 1]))
