@@ -17,7 +17,7 @@ function searchInsert(nums: number[], target: number): number {
     // 区间之间的值，向下取整
     const mid = Math.floor((left + right) / 2)
     if (nums[mid] === target) {
-      // 1. 刚好等于目标值，直接返回（因为题目特殊说明，无重复的数）
+      // 1. 刚好等于目标值，直接返回（题目特殊说明：无重复的数）
       return mid
     } else if (nums[mid] > target) {
       // 2. 大于目标值，但不一定是第一个大于的，所以要收缩右区间，下一轮向左搜索 [left..mid]
