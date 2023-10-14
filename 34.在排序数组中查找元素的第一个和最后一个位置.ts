@@ -15,7 +15,7 @@ function searchRange(nums: number[], target: number): number[] {
   while (left < right) {
     const mid = Math.floor((left + right) / 2)
     if (nums[mid] > target) {
-      // 大于，舍弃右区间，下一轮向左搜索（因为我们的 right 直接用的是数组长度而不是下标，所以这里无需 -1）
+      // 大于，舍弃右区间，下一轮向左搜索（因为 right 直接用的是数组长度而不是下标，所以这里无需 -1）
       right = mid
     } else if (nums[mid] < target) {
       // 小于，舍弃左区间，下一轮向右搜索
