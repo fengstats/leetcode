@@ -5,11 +5,31 @@
  */
 
 // @lc code=start
+// 排序：思路差不多，只是变成了一个有序数组而已，不过时间和内存都要比单独哈希集合占用更多
+function longestConsecutive(nums: number[]): number {
+  // 去重 + 排序
+  const ascendingArr = [...new Set(nums)].sort((a, b) => a - b)
+  let maxLen = 0
+  let count = 1
+
+  for (let i = 0; i < ascendingArr.length; ++i) {
+    // 当前连续序列长度 +1
+    if (ascendingArr[i] + 1 === ascendingArr[i + 1]) count++
+    // 遇到不是连续序列的值，比较已存储连续序列长度，重置序列长度
+    else {
+      maxLen = Math.max(count, maxLen)
+      count = 1
+    }
+  }
+
+  return maxLen
+}
+
 // 哈希集合（hashSet）
 // 思路：通过集合存储数组内的数字，遍历集合，判断当前数字是否是连续序列的起点
 // 若是，继续向后遍历，直到连续序列结束
 // 否则，跳过这个数字，遍历下一个
-function longestConsecutive(nums: number[]): number {
+function longestConsecutive1(nums: number[]): number {
   const set = new Set(nums)
   let maxLen = 0
 
