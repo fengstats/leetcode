@@ -5,10 +5,12 @@
  */
 
 // @lc code=start
-// 思路：维护一个最小买入值，默认为 prices[0]
+// 思路（原来这种解题思路被称为贪心）：维护一个最小买入值，默认为 prices[0]
 // 每天思考一下，假设我是从最低点买入，在今天卖出股票，能赚多少钱？
 // 最小买入值随着更低的股票价格更新，最后看看哪天赚的钱最多，这就是最大利润
 function maxProfit(prices: number[]): number {
+  if (!prices.length) return 0
+
   let ans = 0
   let minPrice = prices[0]
 
