@@ -5,13 +5,11 @@
  */
 
 // @lc code=start
-// 技巧：逆向遍历记录单词长度，从第一个不为空的字符开始计数，直到找到第一个空格，返回记录长度
+// 技巧：逆向遍历记录单词长度，从第一个不为空的字符开始计数，遇到空格直接返回记录长度
 function lengthOfLastWord(s: string): number {
   let count = 0
   for (let i = s.length - 1; i >= 0; --i) {
-    // 从第一个不为空的字符开始
     if (count >= 0 && s[i] !== ' ') count++
-    // 遇到第一个空格且已经开始计数了
     else if (count && s[i] === ' ') return count
   }
 
