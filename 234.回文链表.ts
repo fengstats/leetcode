@@ -17,7 +17,7 @@
  * }
  */
 
-// 暴力：通过数组顺序存储链表，创建头尾双指针一一比较
+// 双指针：通过数组顺序存储链表，创建头尾双指针一一比较
 function isPalindrome(head: ListNode | null): boolean {
   // 存储
   const arr = [head.val]
