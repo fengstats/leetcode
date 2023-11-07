@@ -1,5 +1,6 @@
-function printList(list: number[]) {
-  console.log(list)
-}
+// 集合
+const a = [1, 2, 3, 4, 6, 7, 8]
+const b = [1, 3, 5, 7, 8]
+const c = [1, 2, 4, 6, 9, 10]
 
-printList([1, 3])
+// todo: 求 abc 的交集、并集、差集
