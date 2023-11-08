@@ -7,6 +7,34 @@
 // second = "ple"
 // 输出: True
 
+// 先找出长短字符串，优化之前的一堆 substring
+function oneEditAway(first: string, second: string): boolean {
+  const shortLen = first.length
+  const longLen = second.length
+  if (first === second) return true
+  // 让 first 永远是最短的字符串
+  if (shortLen > longLen) return oneEditAway(second, first)
+  if (longLen - shortLen > 1) return false
+
+  // 先处理替换的情况（长度相同）
+  if (shortLen == longLen) {
+    let count = 0
+    for (let i = 0; i < shortLen; i++) {
+      if (first[i] !== second[i]) count++
+      // 一次容错
+      if (count == 2) return false
+    }
+    return true
+  }
+
+  // 删除与插入（长度差一）
+  for (let i = 0; i < shortLen; i++) {
+    if (first[i] !== second[i]) return first.substring(i) === second.substring(i + 1)
+  }
+
+  return true
+}
+
 // 先处理一些固定情况
 // - 内容完全相等，返回成功
 // - 长度差超过 1，返回失败
@@ -15,7 +43,7 @@
 // - 删除和插入：两者其实是一个东西，只有在长度差为 1 的时候达成，对长的删除，对短的插入
 // 在实际代码中选择一种代码实现即可，这里使用对长的删除，也就是出现错误时，将长字符串跳过
 // 一个字符之后截取，与另一个字符串剩余字符对比
-function oneEditAway(first: string, second: string): boolean {
+function oneEditAway1(first: string, second: string): boolean {
   if (first === second) return true
   if (Math.abs(first.length - second.length) > 1) return false
 
