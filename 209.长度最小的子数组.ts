@@ -5,11 +5,31 @@
  */
 
 // @lc code=start
+
+// 暴力
+function minSubArrayLen(target: number, nums: number[]): number {
+  let ans = Infinity
+
+  for (let left = 0; left < nums.length; left++) {
+    // 每一个下标开始，重置子数组之和
+    let sum = 0
+    for (let right = left; right < nums.length; right++) {
+      sum += nums[right]
+      if (sum >= target) {
+        ans = Math.min(ans, right - left + 1)
+        break
+      }
+    }
+  }
+
+  return ans === Infinity ? 0 : ans
+}
+
 // 滑动窗口：双指针的一种，右指针每次向后移动一步扩大窗口，左指针等待窗口值大于等于 target 时缩小
 // 因为两个指针的移动很像窗口，所以被称之为滑动窗口
-function minSubArrayLen(target: number, nums: number[]): number {
+function minSubArrayLen1(target: number, nums: number[]): number {
   // 最小的子数组长度（默认无限大，因为要用 min 比较）
-  // NOTE: 这里的无穷大也可以使用 nums 长度替代，毕竟子数组不可能比原数组长
+  // NOTE: 这里的无穷大也可以使用 nums.length + 1 替代，毕竟子数组不可能比原数组 + 1 还长
   let ans = Infinity
   // 当前子数组数值之和
   let subSum = 0
@@ -37,4 +57,4 @@ function minSubArrayLen(target: number, nums: number[]): number {
   return ans === Infinity ? 0 : ans
 }
 // @lc code=end
-console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
+console.log(minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1]))
