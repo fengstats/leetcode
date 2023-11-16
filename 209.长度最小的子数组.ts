@@ -5,9 +5,70 @@
  */
 
 // @lc code=start
+// 前缀和 + 二分（前缀和数组与原数组长度相同）
+function minSubArrayLen(target: number, nums: number[]): number {
+  let ans = nums.length + 1
+
+  const preNums: number[] = []
+  nums.forEach((num, i) => {
+    preNums[i] = num + (preNums[i - 1] ?? 0)
+  })
+
+  const binarySearch = (arr: number[], target: number, left: number) => {
+    let right = arr.length
+    while (left < right) {
+      const mid = Math.floor((right - left) / 2 + left)
+      if (arr[mid] >= target) right = mid
+      else left = mid + 1
+    }
+
+    return arr[left] >= target ? left : -1
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    const end = binarySearch(preNums, (preNums[i - 1] ?? 0) + target, i)
+    // NOTE: 这里要 +1
+    if (end != -1 && end - i + 1 < ans) ans = end - i + 1
+  }
+
+  return ans === nums.length + 1 ? 0 : ans
+}
+
+// 前缀和 + 二分（前缀和数组比原数组长度加一）
+function minSubArrayLen3(target: number, nums: number[]): number {
+  let ans = nums.length + 1
+
+  // 1. 构建一个前缀和数组
+  const preNums: number[] = [0]
+  nums.forEach((num, i) => {
+    preNums[i + 1] = num + preNums[i]
+  })
+
+  // 2. 自写二分函数
+  const binarySearch = (arr: number[], target: number, left: number) => {
+    let right = arr.length
+    while (left < right) {
+      const mid = Math.floor((right - left) / 2 + left)
+      if (arr[mid] >= target) right = mid
+      else left = mid + 1
+    }
+
+    // 加一层校验，预防压根就没有符合要求的值的情况
+    return arr[left] >= target ? left : -1
+  }
+
+  // 3. 二分遍历查
+  for (let i = 0; i < nums.length; i++) {
+    const end = binarySearch(preNums, preNums[i] + target, i)
+    // NOTE: 不需要 +1，因为我们使用的前缀和数组下标比原数组长一个单位
+    if (end != -1 && end - i < ans) ans = end - i
+  }
+
+  return ans === nums.length + 1 ? 0 : ans
+}
 
 // 暴力
-function minSubArrayLen(target: number, nums: number[]): number {
+function minSubArrayLen2(target: number, nums: number[]): number {
   let ans = Infinity
 
   for (let left = 0; left < nums.length; left++) {
@@ -57,4 +118,5 @@ function minSubArrayLen1(target: number, nums: number[]): number {
   return ans === Infinity ? 0 : ans
 }
 // @lc code=end
-console.log(minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1]))
+console.log(minSubArrayLen(7, [7]))
+console.log(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))
