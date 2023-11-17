@@ -20,8 +20,16 @@
 /**
   Do not return anything, modify it in-place instead.
  */
-// 常规思路：遍历后续的节点一一进行替换
+// 骚操作：直接伪装成下一个节点并且指向下下个节点，相当于我完全替代了你哈哈哈哈
 function deleteNode(node: ListNode | null): void {
+  if (node.next === null) return
+
+  node.val = node.next.val
+  node.next = node.next.next
+}
+
+// 常规思路：遍历后续的节点一一进行替换
+function deleteNode1(node: ListNode | null): void {
   while (node?.next) {
     // 伪装成下一个节点
     node.val = node.next.val
