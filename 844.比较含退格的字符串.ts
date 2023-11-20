@@ -5,11 +5,41 @@
  */
 
 // @lc code=start
-// TODO: 逆向双指针
+// 逆向双指针：分别记录两个可跳过次数与两个指针，从两个字符串的尾部开始遍历
+// 1. 先判断字符是否是为 # 字符，返回普通字符
+//   - 是：对应字符的可跳过次数加一
+//   - 否：是否有可跳过次数，有多少次跳多少个（以 0 为边界）
+// 2. 两个字符为普通字符且可跳过次数为 0 时进行对比
+//   - 不相同：退出，返回失败
+//   - 相同：比下一个
+function backspaceCompare(s: string, t: string): boolean {
+  // 返回经过逆序删除 # 以及其对应需要删除次数后的普通字符下标
+  const normalCharIndex = (str: string, right: number, skipCount = 0) => {
+    while (str[right] === '#' || skipCount) {
+      // NOTE: 这里省略个 if else，因为进来的不是 # 字符
+      // 那就只能是 skipCount > 0 的情况，要么加一，要么减一
+      skipCount += str[right] === '#' ? 1 : -1
+      right--
+    }
+    return right
+  }
+
+  let pS = s.length - 1
+  let pT = t.length - 1
+  while (pS >= 0 || pT >= 0) {
+    // 返回的普通字符对比
+    pS = normalCharIndex(s, pS)
+    pT = normalCharIndex(t, pT)
+
+    if (s[pS--] !== t[pT--]) return false
+  }
+
+  return true
+}
 
 // 快慢双指针：正常的字符就向前走，遇到 # 字符
 // 快指针向前走一步，慢指针则退一步，快指针位置给慢指针位置赋值即可
-function backspaceCompare(s: string, t: string): boolean {
+function backspaceCompare2(s: string, t: string): boolean {
   const build = (str: string) => {
     const arr: string[] = Array.from(str)
 
