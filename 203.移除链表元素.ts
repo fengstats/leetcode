@@ -17,8 +17,30 @@
  * }
  */
 
-// 暴力
+// 通过前节点来操作
 function removeElements(head: ListNode | null, val: number): ListNode | null {
+  if (!head) return null
+  let newHead = null
+  let prev: ListNode | null = null
+
+  while (head) {
+    // 找出新的头节点
+    if (head.val !== val && !newHead) newHead = head
+
+    // 当前节点需要移除，让前一个节点的 next 指向下一个节点
+    // NOTE: 需要移除的目标节点不需要记录到 prev 节点
+    if (head.val === val && prev) prev.next = head.next
+    // 记录当前节点，作为下个节点的前节点
+    else prev = head
+
+    head = head.next
+  }
+
+  return newHead
+}
+
+// 暴力
+function removeElements1(head: ListNode | null, val: number): ListNode | null {
   if (!head) return null
 
   // 存储移除目标节点后的节点列表
