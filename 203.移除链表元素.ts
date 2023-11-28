@@ -17,8 +17,26 @@
  * }
  */
 
-// 通过前节点来操作
+// 虚拟头节点：方便统一操作
+// 如果当前节点的下一个节点是需要移除的目标节点
+// 那么当前节点的 next 指向更改为下一个节点的 next
+// 其实就是跳过下一个节点，指向下下个节点
 function removeElements(head: ListNode | null, val: number): ListNode | null {
+  let dummyHead = new ListNode()
+  dummyHead.next = head
+
+  // 临时节点，用于移动
+  let curHead = dummyHead
+  while (curHead.next) {
+    if (curHead.next.val === val) curHead.next = curHead.next.next
+    else curHead = curHead.next
+  }
+
+  return dummyHead.next
+}
+
+// 通过前节点来操作
+function removeElements2(head: ListNode | null, val: number): ListNode | null {
   if (!head) return null
   let newHead = null
   let prev: ListNode | null = null
