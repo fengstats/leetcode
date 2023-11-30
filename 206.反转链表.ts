@@ -27,8 +27,27 @@
 //   }
 // }
 
-// 递归：时隔多日再写一遍
+// 再站双指针！
 function reverseList(head: ListNode | null): ListNode | null {
+  let prev: ListNode | null = null
+  let cur = head
+  while (cur) {
+    // 1->2 变成 1->null
+    // 2->3 编程 2->1
+    const next = cur.next
+    cur.next = prev
+    // 两个指针同时向后移动一位
+    prev = cur
+    cur = next
+  }
+
+  // NOTE: 需要注意这里不是返回 cur，因为循环条件是 cur 有值
+  // 退出循环后说明 cur 肯定没有值了，应该是返回上一个节点的值才是最后一个节点
+  return prev
+}
+
+// 递归：时隔多日再写一遍
+function reverseList4(head: ListNode | null): ListNode | null {
   if (!head) return null
 
   // 1. 找最后一个节点
@@ -36,7 +55,7 @@ function reverseList(head: ListNode | null): ListNode | null {
 
   // 2. 开始递归
   // NOTE: 这里是扔进递归的是 next，意思就是从倒数第二个节点开始
-  const lastNode = reverseList(head.next)
+  const lastNode = reverseList4(head.next)
 
   // 3. 反转开始：这里所提的上个节点皆按照倒序
   // NOTE: 直接和上个节点成环
