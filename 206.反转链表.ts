@@ -17,8 +17,41 @@
  * }
  */
 
-// 递归：精髓就是理解 head.next.next = head 这个操作
+// NOTE: 必须要注释才能 submit 代码
+// class ListNode {
+//   val: number
+//   next: ListNode | null
+//   constructor(val?: number, next?: ListNode) {
+//     this.val = val ?? 0
+//     this.next = next ?? null
+//   }
+// }
+
+// 递归：时隔多日再写一遍
 function reverseList(head: ListNode | null): ListNode | null {
+  if (!head) return null
+
+  // 1. 找最后一个节点
+  if (head.next === null) return head
+
+  // 2. 开始递归
+  // NOTE: 这里是扔进递归的是 next，意思就是从倒数第二个节点开始
+  const lastNode = reverseList(head.next)
+
+  // 3. 反转开始：这里所提的上个节点皆按照倒序
+  // NOTE: 直接和上个节点成环
+  head.next.next = head
+
+  // 4. 打破这个环，上个节点指向我，我指向 null
+  // 递归后的下个节点也会指向我（单向），届时让我和它练成环（双向）
+  // 然后打破，让我来指向它（单向），它指向 null，一直到最后一个（初始链表的头节点）
+  head.next = null
+
+  return lastNode
+}
+
+// 递归：精髓就是理解 head.next.next = head 这个操作
+function reverseList3(head: ListNode | null): ListNode | null {
   // 第一层的边界处理，链表为空
   if (!head) return null
 
@@ -26,7 +59,7 @@ function reverseList(head: ListNode | null): ListNode | null {
   if (head.next === null) return head
 
   // 递归开始（入栈），最终返回值就是上面的那个判断，也就是最后一个节点
-  const newHead = reverseList(head.next)
+  const newHead = reverseList3(head.next)
 
   // 假设链表为 a->b->c->null，递归能到这肯定是 b 节点（倒数第二个）
   // 经过这个操作后会变成 b->c->b，也就是将 c 节点的指向改成了 b，开始反转
@@ -43,7 +76,7 @@ function reverseList(head: ListNode | null): ListNode | null {
 // 迭代：一次循环搞定（双指针或三指针？用了一个临时节点存储）
 function reverseList2(head: ListNode | null): ListNode | null {
   // 上一个的节点
-  let prev = null
+  let prev: ListNode | null = null
   // 剩余节点，用于循环
   let remain = head
 
