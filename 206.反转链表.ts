@@ -27,8 +27,29 @@
 //   }
 // }
 
-// 再站双指针！
+// 递归：双指针思路的版本
 function reverseList(head: ListNode | null): ListNode | null {
+  function reverse(cur: ListNode | null, prev: ListNode | null) {
+    // 到最后一个节点了，该返回了
+    if (cur === null) return prev
+    // 临时存储，用于移动
+    const next = cur.next
+    // 反转，当前节点指向上一个节点
+    cur.next = prev
+    // 统一移动一位
+    // NOTE: 别以为上面 return prev 这里就不管了
+    // 这里还是要 return reverse 函数的，不然直接 undefine 了
+    // 调试了半个多小时 😭
+    return reverse(next, cur)
+    // 其实就是省略了下面的代码
+    // prev = cur
+    // cur = next
+  }
+  return reverse(head, null)
+}
+
+// 再站双指针！
+function reverseList5(head: ListNode | null): ListNode | null {
   let prev: ListNode | null = null
   let cur = head
   while (cur) {
@@ -132,3 +153,10 @@ function reverseList1(head: ListNode | null): ListNode | null {
   return arr[lastIndex]
 }
 // @lc code=end
+
+const head5 = new ListNode(5)
+const head4 = new ListNode(4, head5)
+const head3 = new ListNode(3, head4)
+const head2 = new ListNode(2, head3)
+const head1 = new ListNode(1, head2)
+console.log(reverseList(head1))
