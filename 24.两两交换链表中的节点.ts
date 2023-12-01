@@ -25,12 +25,37 @@ class ListNode {
   }
 }
 
-// 双指针
-function swapPairs(head: ListNode | null): ListNode | null {
-  if (!head) return null
+// TODO: 补充递归版本（看一眼题解都觉得晕 🤡）
 
-  // 单独处理只有一个节点的情况
-  if (head.next === null) return head
+// 虚拟头节点：位置在需要交换的两个节点之前，方便一次操作两个节点
+function swapPairs(head: ListNode | null): ListNode | null {
+  if (!head || head.next === null) return head
+
+  const dummyNode: ListNode | null = new ListNode(999, head)
+  let cur = dummyNode
+
+  // 奇数用 cur.next 为 null 终止
+  // 偶数用 cur.next.next 为 null 终止
+  while (cur.next !== null && cur.next.next !== null) {
+    const tmp = cur.next // 1
+    const next = cur.next.next.next // 3
+
+    // NOTE: 因为最终返回的是 dummy.next，交换需要保证 dummy.next 为新头，不能乱换
+    cur.next = cur.next.next // d->2
+    cur.next.next = tmp // d->2->1，注意这里 1->2 是有环的
+    cur.next.next.next = next // d->2->1->3
+
+    // 向后移动两位继续交换
+    cur = cur.next.next // d=3
+  }
+
+  return dummyNode.next
+}
+
+// 双指针
+function swapPairs1(head: ListNode | null): ListNode | null {
+  // 单独处理没有节点或只有一个节点的情况
+  if (!head || head.next === null) return head
 
   // 返回的新头，从第二个节点开始
   const newHead = head.next
