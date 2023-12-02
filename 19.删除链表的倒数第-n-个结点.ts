@@ -56,9 +56,9 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 function removeNthFromEnd1(head: ListNode | null, n: number): ListNode | null {
   if (!head) return head
 
-  const dummyNode = new ListNode(999, head)
-  let fast: ListNode | null = dummyNode
-  let slow: ListNode | null = dummyNode
+  const dummyHead = new ListNode(999, head)
+  let fast: ListNode | null = dummyHead
+  let slow: ListNode | null = dummyHead
 
   // 快指针走
   while (n) {
@@ -76,9 +76,9 @@ function removeNthFromEnd1(head: ListNode | null, n: number): ListNode | null {
 
   // 删除倒数 n 个节点
   // 这里就是虚拟头节点的好处了，不需要特殊判断
-  // 如果要删的是第一个，那么 slow 就是 dummyNode
+  // 如果要删的是第一个，那么 slow 就是 dummyHead
   slow!.next = slow!.next!.next
 
-  return dummyNode.next
+  return dummyHead.next
 }
 // @lc code=end
