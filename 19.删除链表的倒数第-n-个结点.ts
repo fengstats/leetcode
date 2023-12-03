@@ -26,6 +26,8 @@ class ListNode {
   }
 }
 
+// TODO: 补充栈或者说是递归解法，参考题解思路：https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solutions/450350/shan-chu-lian-biao-de-dao-shu-di-nge-jie-dian-b-61/
+
 // 只用快慢指针
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
   if (!head) return head
@@ -50,7 +52,7 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
   return head
 }
 
-// 快慢双指针 + 虚拟头节点（统一操作，减少特殊情况判断）
+// 快慢双指针 + 虚拟头节点（统一操作，不需要对头节点特殊情况判断）
 // 先让快指针走 n 步，然后让快指针和慢指针一起走，直到快指针的 next 为空
 // 此时慢指针位置就是需要删除节点的前一个位置，那怎么删就不用我说了吧？
 function removeNthFromEnd1(head: ListNode | null, n: number): ListNode | null {
@@ -75,8 +77,7 @@ function removeNthFromEnd1(head: ListNode | null, n: number): ListNode | null {
   }
 
   // 删除倒数 n 个节点
-  // 这里就是虚拟头节点的好处了，不需要特殊判断
-  // 如果要删的是第一个，那么 slow 就是 dummyHead
+  // 这里就是虚拟头节点的好处了，如果要删的是头节点，那么 slow 就是 dummyHead
   slow!.next = slow!.next!.next
 
   return dummyHead.next
