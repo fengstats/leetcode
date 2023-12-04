@@ -17,6 +17,10 @@
  * }
  */
 
+// TODO: 递归
+
+// TODO: 双指针
+
 // 暴力：先把两个链表存数组，经过排序后一一更改指向
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
   // 边界处理
