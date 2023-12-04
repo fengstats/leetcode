@@ -5,7 +5,11 @@
  */
 
 // @lc code=start
-// 暴力（34 测试用例超时）：从加油站 0 到 0，1 到 1，n 到 n，一个个点来试，因为需要绕一圈，所以计算需要取余
+
+// TODO: 贪心
+
+// 这个方案超时了，不过应该是可行的。
+// 暴力：从加油站 0 到 0，1 到 1，n 到 n，一个个点来试，因为需要绕一圈，所以计算需要取余
 // gas 是补给油量
 // cost 是消耗油量
 function canCompleteCircuit(gas: number[], cost: number[]): number {
