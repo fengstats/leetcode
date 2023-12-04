@@ -12,9 +12,26 @@
  * @return {ListNode}
  */
 
+// hashMap
+var getIntersectionNode = function (headA, headB) {
+  const nodeMap = new Map()
+
+  while (headA) {
+    nodeMap.set(headA, 1)
+    headA = headA.next
+  }
+
+  while (headB) {
+    if (nodeMap.has(headB)) return headB
+    headB = headB.next
+  }
+
+  return null
+}
+
 // 和「 160.相交链表 」一模一样，就不多 BB 了
 // 双指针
-var getIntersectionNode = function (headA, headB) {
+var getIntersectionNode1 = function (headA, headB) {
   let pA = headA
   let pB = headB
 
