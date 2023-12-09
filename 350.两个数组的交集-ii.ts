@@ -6,8 +6,41 @@
 
 // @lc code=start
 
-// hashMap
+// hashMap: 优化版本，只用一个就够了
 function intersect(nums1: number[], nums2: number[]): number[] {
+  if (!nums1.length || !nums2.length) return []
+
+  // 让 nums1 为是长度较短的数组
+  if (nums1.length > nums2.length) {
+    return intersect(nums2, nums1)
+  }
+
+  const ans: number[] = []
+  const hashMap = new Map()
+  // 把 nums1 的数值按照 { 数值: 出现次数 } 存储
+  for (let num of nums1) {
+    if (!hashMap.has(num)) hashMap.set(num, 0)
+    hashMap.set(num, hashMap.get(num) + 1)
+  }
+
+  // 遍历 nums2 求交集
+  for (let num of nums2) {
+    const count = hashMap.get(num)
+    // count 为零了说明 nums2 这个数值的出现次数是比 nums1 多的
+    // 此时我们遵循：如果出现次数不一致，则考虑取较小值
+    if (hashMap.has(num) && count !== 0) {
+      // 每遇到一个存在 hashMap 中的值，其出现次数 -1
+      hashMap.set(num, count - 1)
+      // 并且将其 push 至 ans 数组
+      ans.push(num)
+    }
+  }
+
+  return ans
+}
+
+// hashMap
+function intersect1(nums1: number[], nums2: number[]): number[] {
   if (!nums1.length || !nums2.length) return []
 
   // 转换存储
