@@ -4,8 +4,25 @@
  * [1] 两数之和
  */
 // @lc code=start
-// 暴力解题：比双层 for 循环更好理解一点，写法更优雅（其实差不多……）
+
+// hashMap: 刷代码随想录刷到这题，再来写一遍
 function twoSum(nums: number[], target: number): number[] {
+  // key 存数值，value 存下标
+  const numsMap = new Map()
+
+  for (let i = 0; i < nums.length; i++) {
+    // 判断之前存储的数值里面是否有可以组成两数之和的存在
+    if (numsMap.has(target - nums[i])) {
+      return [numsMap.get(target - nums[i]), i]
+    }
+    numsMap.set(nums[i], i)
+  }
+
+  return [-1, -1]
+}
+
+// 暴力解题：比双层 for 循环更好理解一点，写法更优雅（其实差不多……）
+function twoSum3(nums: number[], target: number): number[] {
   for (let i = 0; i < nums.length - 1; ++i) {
     // 通过 indexOf 第二个参数 i+1 跳过自身（前面的数肯定都比较过了，再比较没有意义）
     // 直接向后面的子数组查找
