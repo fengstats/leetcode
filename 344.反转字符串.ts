@@ -5,12 +5,21 @@
  */
 
 // @lc code=start
-/**
- Do not return anything, modify s in-place instead.
- */
+
+// 2023-12-14 再战双指针
+function reverseString(s: string[]): void {
+  let left = 0
+  let right = s.length - 1
+  while (left < right) {
+    ;[s[left], s[right]] = [s[right], s[left]]
+    // NOTE: 记得要移动指针敖
+    left++
+    right--
+  }
+}
 
 // 双指针：左右两个指针分别向中间靠拢同时一一交换值，直到两个指针重合，交换完毕
-function reverseString(s: string[]): void {
+function reverseString2(s: string[]): void {
   let left = 0
   let right = s.length - 1
   // 通过数组解构交换值
