@@ -6,8 +6,54 @@
 
 // @lc code=start
 
-// api 工程师直接秒了！
+// 2023-12-15 再战快慢双指针
 function reverseWords(s: string): string {
+  const arr = Array.from(s)
+
+  // 反转函数，左闭右开
+  function reverse(arr: string[], left: number, right: number) {
+    while (left < right) {
+      const temp = arr[left]
+      arr[left] = arr[right]
+      arr[right] = temp
+      left++
+      right--
+    }
+  }
+
+  // 整个字符先反转一遍
+  reverse(arr, 0, arr.length - 1)
+
+  let slow = 0
+  let fast = 0
+  // 单个单词反转
+  while (fast < arr.length) {
+    // 去除前面的空格
+    if (arr[fast] !== ' ') {
+      // 给每个单词之间隔一个空格，除了第一个单词
+      if (slow > 0) arr[slow++] = ' '
+      // 单词的第一个字母下标
+      const startIndex = slow
+      // 快指针持续移动给慢指针更新单词
+      // NOTE: 这里要注意 fast 不能越界，越界后也会满足不等于空格的条件，那就在这卡死了
+      while (fast < arr.length && arr[fast] !== ' ') {
+        arr[slow++] = arr[fast++]
+      }
+      // console.log(startIndex, slow)
+      // NOTE: 这里 slow 是空格的位置
+      reverse(arr, startIndex, slow - 1)
+    }
+    fast++
+  }
+
+  // 截断 slow 位置
+  arr.length = slow
+
+  return arr.join('')
+}
+
+// api 工程师直接秒了！
+function reverseWords3(s: string): string {
   return s
     .split(' ')
     .filter((item) => item)
@@ -20,7 +66,7 @@ function reverseWords(s: string): string {
 function reverseWords2(s: string): string {
   if (!s) return ''
   // 反转函数
-  const reverse = (arr: string[], left, right) => {
+  const reverse = (arr: string[], left: number, right: number) => {
     while (left < right) [arr[left++], arr[right--]] = [arr[right], arr[left]]
   }
 
@@ -79,3 +125,5 @@ function reverseWords1(s: string): string {
   return wordList.join(' ')
 }
 // @lc code=end
+
+console.log(reverseWords('the sky is blue'))
