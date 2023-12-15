@@ -5,9 +5,19 @@
  */
 
 // @lc code=start
+
+// api 工程师直接秒了！
+function reverseWords(s: string): string {
+  return s
+    .split(' ')
+    .filter((item) => item)
+    .reverse()
+    .join(' ')
+}
+
 // 快慢双指针：去除多余空格
 // 反转函数：先把字符串整体反转，然后处理单个单词反转
-function reverseWords(s: string): string {
+function reverseWords2(s: string): string {
   if (!s) return ''
   // 反转函数
   const reverse = (arr: string[], left, right) => {
