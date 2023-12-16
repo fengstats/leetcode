@@ -14,8 +14,26 @@
 // 输入: s = "a", t = "a"
 // 输出: false
 
-// 数组模拟 26 个字母的方式代替 hashMap（主要是使用 codePointAt 方法）
+// 2023-12-16 再写一遍
+// charCodeAt + toString
 function isAnagram(s: string, t: string): boolean {
+  if (s === t || s.length !== t.length) return false
+
+  // NOTE: charCodeAt 只能返回下标位置的第一个字符 unicode，codePointAt 可以返回该下标字符完整 unicode
+  const A_UNICODE = 'a'.charCodeAt(0)
+  const sTable = new Array(26).fill(0)
+  const tTable = new Array(26).fill(0)
+
+  for (let i = 0; i < s.length; i++) {
+    sTable[s[i].charCodeAt(0) - A_UNICODE]++
+    tTable[t[i].charCodeAt(0) - A_UNICODE]++
+  }
+
+  return sTable.toString() === tTable.toString()
+}
+
+// 数组模拟 26 个字母的方式代替 hashMap（主要是使用 codePointAt 方法）
+function isAnagram3(s: string, t: string): boolean {
   if (s === t || s.length !== t.length) return false
 
   const table = new Array(26).fill(0)
