@@ -1,4 +1,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "Codegeex.EnableExtension": false
+  "Codegeex.EnableExtension": false,
+  "baidu.comate.langSuggestion": {
+    "javascript": false,
+    "typescript": false
+  }
 }
