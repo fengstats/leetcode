@@ -2,13 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-node",
+      "name": "tsx debug",
+      "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
+      // 相对位置文件
       "args": ["${relativeFile}"],
-      "outFiles": ["${workspaceFolder}/**/*.js"]
+      // 使用什么来执行文件
+      "runtimeExecutable": "tsx",
+      // 在调试会话启动时同时打开控制台
+      "internalConsoleOptions": "openOnSessionStart",
+      // 禁止警告
+      "runtimeArgs": ["--no-warnings"]
+      // "cwd": "${workspaceRoot}",
     }
   ]
 }
