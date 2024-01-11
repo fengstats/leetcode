@@ -1,8 +1,26 @@
 type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue }
 type ArrayType = { id: number } & Record<string, JSONValue>
 
-// hashMap
+// TODO: 二分
+
+// 对象
 function join(arr1: ArrayType[], arr2: ArrayType[]): ArrayType[] {
+  const obj = {}
+  for (const item of arr1) obj[item.id] = item
+  for (const item of arr2) {
+    // 通过 Object.assign 用新对象覆盖原对象属性
+    const key = item.id
+    // 注意 obj[key] 可能为 undefined
+    obj[key] = Object.assign(obj[key] ?? {}, item)
+  }
+
+  // 直接通过对象插入新属性时，会通过对象 key 进行排序
+  // 所以在使用 Object.values 转换时 id 是升序返回的
+  return Object.values(obj)
+}
+
+// hashMap
+function join1(arr1: ArrayType[], arr2: ArrayType[]): ArrayType[] {
   const map = new Map<number, ArrayType>()
   for (const item of arr1) map.set(item.id, item)
   for (const item of arr2) {
@@ -22,13 +40,10 @@ function join(arr1: ArrayType[], arr2: ArrayType[]): ArrayType[] {
   return Array.from(map.values()).sort((a, b) => a.id - b.id)
 }
 
-const arr1 = [
-  { id: 1, x: 2, y: 3 },
-  { id: 2, x: 3, y: 6 },
+const arr1: ArrayType[] = [
+  { id: 1, x: 36, d: 26, f: 35 },
+  { id: 3, c: 20, z: 75 },
 ]
-const arr2 = [
-  { id: 2, x: 10, y: 20 },
-  { id: 3, x: 0, y: 0 },
-]
+const arr2: ArrayType[] = [{ id: 2, o: 48, z: 84, y: 61 }]
 
 console.log(join(arr1, arr2))
