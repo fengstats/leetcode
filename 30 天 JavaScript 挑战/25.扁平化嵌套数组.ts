@@ -1,7 +1,43 @@
 type MultiDimensionalArray = (number | MultiDimensionalArray)[]
 
-// 递归优化
+// 迭代队列
 var flat = function (arr: MultiDimensionalArray, n: number): MultiDimensionalArray {
+  // 是否还存在嵌套数组元素
+  let nestedArrayElement = true
+  // 每次迭代处理的队列
+  let queue
+  // 遍历的深度，不会超过 n
+  let depth = 0
+
+  while (nestedArrayElement && depth < n) {
+    // 默认这次迭代之后就不存在嵌套数组元素了
+    nestedArrayElement = false
+    // 队列置空
+    queue = []
+
+    for (const item of arr) {
+      if (Array.isArray(item)) {
+        // 可能还有嵌套数组元素，先改标记
+        nestedArrayElement = true
+        // 展开一层并 push 到队列中
+        queue.push(...item)
+      } else {
+        // 非嵌套数组元素，直接 push
+        queue.push(item)
+      }
+    }
+
+    // 将展开的队列更新到原数组中，方便后续继承展开
+    arr = [...queue]
+    // 深度 +1
+    depth++
+  }
+
+  return arr
+}
+
+// 递归优化
+var flat3 = function (arr: MultiDimensionalArray, n: number): MultiDimensionalArray {
   // 这样 ans 就只会被声明一次啦
   const ans: MultiDimensionalArray = []
 
