@@ -22,12 +22,13 @@ function sortBy(arr: JSONValue[], fn: Fn): JSONValue[] {
         rightArr.push(arr[i])
       }
     }
-    // 对两部分分别进行递归处理最后合并
-    return [...quickSort(leftArr), baseValue, ...quickSort(rightArr)]
-    // NOTE: 小坑，concat 遇到多维数组合并时会自动展开内部元素
-    // 这就导致了 [[1,2]].concat([3,4]) 会变成 [[1,2],3,4]
-    // 而我想要的结果是 [[1,2],[3,4]]
-    // return quickSort(leftArr).concat(baseValue, quickSort(rightArr))
+    // 左右分别进行递归处理最后合并
+    // NOTE: 小坑，concat 遇到多维数组合并时会自动展开一层内部元素
+    // 这就导致了 [[1,2]].concat([3,4], [[5,6]]) 会变成 [[1,2],3,4,[5,6]]
+    // 中间的 [3,4] 我是不希望被展开的，所以在使用时需要给 baseValue 添加一个 []
+    return quickSort(leftArr).concat([baseValue], quickSort(rightArr))
+    // 也可以使用 `...` 扩展运算符，行为与 concat 相似，但不需要额外给 baseValue 添加一个 []
+    // return [...quickSort(leftArr), baseValue, ...quickSort(rightArr)]
   }
 
   return quickSort(arr)
@@ -41,12 +42,14 @@ function sortBy1(arr: JSONValue[], fn: Fn): JSONValue[] {
 }
 
 console.log(
-  sortBy(
-    [
-      [3, 4],
-      [5, 2],
-      [10, 1],
-    ],
-    (x) => x![1],
+  JSON.stringify(
+    sortBy(
+      [
+        [3, 3],
+        [2, 2],
+        [1, 1],
+      ],
+      (x) => x![1],
+    ),
   ),
 )
