@@ -6,8 +6,27 @@
 
 // @lc code=start
 
-// 单个 hashMap
+// 再写一遍
 function countWords(words1: string[], words2: string[]): number {
+  let ans = 0
+  const map = new Map()
+
+  for (const word of words1) {
+    if (!map.has(word)) map.set(word, 1)
+    else map.set(word, Infinity)
+  }
+  for (const word of words2) {
+    if (map.has(word)) map.set(word, map.get(word) + 1)
+  }
+  for (const count of map.values()) {
+    if (count === 2) ans++
+  }
+
+  return ans
+}
+
+// 单个 hashMap
+function countWords2(words1: string[], words2: string[]): number {
   let ans = 0
   const map = new Map()
 
