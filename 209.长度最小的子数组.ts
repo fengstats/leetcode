@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 前缀和 + 二分（前缀和数组与原数组长度相同）
 function minSubArrayLen(target: number, nums: number[]): number {
   let ans = nums.length + 1

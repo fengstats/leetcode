@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 数组模拟哈希表：和 LCR 032 题基本一样，就是对字母异位词的定义有些不同，就不写思路了
 function isAnagram(s: string, t: string): boolean {
   if (s === t) return true

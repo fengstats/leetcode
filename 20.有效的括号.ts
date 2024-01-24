@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // Map 对象 + 栈
 function isValid(s: string): boolean {
   if (s.length <= 1) return false

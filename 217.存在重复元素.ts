@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 思路：set 集合
 function containsDuplicate(nums: number[]): boolean {
   const set = new Set()

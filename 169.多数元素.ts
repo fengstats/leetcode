@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 思路：hashMap 记录数组元素出现次数进行比较
 function majorityElement(nums: number[]): number {
   const map = new Map()

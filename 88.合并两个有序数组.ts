@@ -5,9 +5,9 @@
  */
 
 // @lc code=start
-/**
-  Do not return anything, modify nums1 in-place instead.
- */
+
+// 提示：不要返回任何内容，而是就地修改 nums1
+
 // 思路：利用题目所提两个数组皆为非递减顺序数组（升序）且 num1 长度为 m + n
 // 尾部空余空间使用 0 填充这些条件，想在不影响原始值的情况下进行 num1 原地更改：
 // 1. 使用两个指针在两个数组的尾部值做比较

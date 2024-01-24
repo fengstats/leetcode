@@ -5,7 +5,8 @@
  */
 
 // @lc code=start
-// 排序 + 哈希：无思路，参考题解
+
+// 排序 + hashMap: 无思路，参考题解
 function groupAnagrams(strs: string[]): string[][] {
   // 互为字母异位词的两个字符串包含字母肯定是相同的，所以对其进行排序后的结果肯定也是相同的
   // 将字符串排序后的结果作为 Map 的 key，其 value 为一个字符串数组

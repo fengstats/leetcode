@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // hashMap: 刚开始想简单了，就写了个单 Map 映射对比，这题需要双 Map 映射
 // 一个存 key:value，一个存 value:key，对比通过双重验证才行
 function wordPattern(pattern: string, s: string): boolean {

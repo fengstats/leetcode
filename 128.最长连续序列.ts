@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 排序：思路差不多，只是变成了一个有序数组而已，不过时间和内存都要比单独哈希集合占用更多
 function longestConsecutive(nums: number[]): number {
   // 去重 + 排序

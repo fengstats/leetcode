@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 技巧：考虑到面试可能不让用 split 这种 api，所以自己对字符做处理
 function sortSentence(s: string): string {
   if (!s) return ''

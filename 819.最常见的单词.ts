@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 正则 + hashMap
 function mostCommonWord(paragraph: string, banned: string[]): string {
   // 1. 将 paragraph 字符串全部转为小写字母，然后通过正则将有效单词匹配至一个数组中

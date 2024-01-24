@@ -5,9 +5,8 @@
  */
 
 // @lc code=start
-/**
- Do not return anything, modify nums in-place instead.
- */
+
+// 提示：不要返回任何内容，就地修改 nums
 
 // 计数排序代码优化
 function sortColors(nums: number[]): void {

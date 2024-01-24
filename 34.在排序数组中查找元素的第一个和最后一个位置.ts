@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 二分：三个问题即可掌握二分，可以继续循环的条件是？mid 是否可能是答案？下一轮搜索是左还是右？
 function searchRange(nums: number[], target: number): number[] {
   let left = 0

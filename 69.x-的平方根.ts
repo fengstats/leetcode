@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 二分
 function mySqrt(x: number): number {
   let left = 0

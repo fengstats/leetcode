@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+
+// 技巧
 function longestCommonPrefix(strs: string[]): string {
   if (strs.length === 0) return ''
 

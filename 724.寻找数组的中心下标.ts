@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 // 后缀和：先把数组所有和求出来（用于左右都可以，看从遍历方向）
 // 然后逐步更新右侧数之和与左侧数之和用于对比
 function pivotIndex(nums: number[]): number {

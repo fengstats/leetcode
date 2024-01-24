@@ -5,9 +5,9 @@
  */
 
 // @lc code=start
-/**
- Do not return anything, modify nums in-place instead.
- */
+
+// 提示：不要返回任何内容，就地修改 nums
+
 // 拼接法：将原数组 x 2 存放到一个新数组中，通过 k 来找到轮转的起始位置（len-k）
 // 从该位置开始依次赋值给原数组
 function rotate(nums: number[], k: number): void {
