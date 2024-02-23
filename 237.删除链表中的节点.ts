@@ -5,24 +5,19 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
 
-/**
-  Do not return anything, modify it in-place instead.
- */
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val = 0, next = null) {
+    this.val = val
+    this.next = next
+  }
+}
+
 // 骚操作：直接伪装成下一个节点并且指向下下个节点，相当于我完全替代了你哈哈哈哈
 function deleteNode(node: ListNode | null): void {
-  if (node.next === null) return
+  if (node === null || node.next === null) return
 
   node.val = node.next.val
   node.next = node.next.next

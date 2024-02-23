@@ -5,27 +5,17 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
 
 // NOTE: 必须要注释才能 submit 代码
-// class ListNode {
-//   val: number
-//   next: ListNode | null
-//   constructor(val?: number, next?: ListNode) {
-//     this.val = val ?? 0
-//     this.next = next ?? null
-//   }
-// }
+
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val?: number, next?: ListNode) {
+    this.val = val ?? 0
+    this.next = next ?? null
+  }
+}
 
 // 递归：双指针思路的版本
 function reverseList(head: ListNode | null): ListNode | null {

@@ -7,14 +7,15 @@
 // @lc code=start
 
 // Definition for singly-linked list.
-// class ListNode {
-//   val: number
-//   next: ListNode | null
-//   constructor(val?: number, next?: ListNode | null) {
-//     this.val = val === undefined ? 0 : val
-//     this.next = next === undefined ? null : next
-//   }
-// }
+
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val
+    this.next = next === undefined ? null : next
+  }
+}
 
 // 双指针：画图是比较容易理解的，文字说起来可能有点绕
 // pA 指针从 headA 第一个元素出发，直到为 null，将 pA 指向 headB

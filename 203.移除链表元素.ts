@@ -5,17 +5,15 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
+
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val: number = 0, next: ListNode | null = null) {
+    this.val = val
+    this.next = next
+  }
+}
 
 // 虚拟头节点：方便统一操作
 // 如果当前节点的下一个节点是需要移除的目标节点

@@ -6,14 +6,14 @@
 
 // @lc code=start
 
-// class ListNode {
-//   val: number
-//   next: ListNode | null
-//   constructor(val?: number, next?: ListNode | null) {
-//     this.val = val || 0
-//     this.next = next || null
-//   }
-// }
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val || 0
+    this.next = next || null
+  }
+}
 
 // 优化：使用虚拟头节点的方式，统一操作，简化代码
 class MyLinkedList {

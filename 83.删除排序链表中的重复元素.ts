@@ -6,14 +6,14 @@
 
 // @lc code=start
 
-// class ListNode {
-//   val: number
-//   next: ListNode | null
-//   constructor(val: number = 0, next: ListNode | null = null) {
-//     this.val = val
-//     this.next = next
-//   }
-// }
+class ListNode {
+  val: number
+  next: ListNode | null
+  constructor(val: number = 0, next: ListNode | null = null) {
+    this.val = val
+    this.next = next
+  }
+}
 
 // 由于题目提到 “已排序” 链表特性，因此重复元素在链表中出现的位置也是连续的，一次遍历根据更改不重复节点指向即可删除掉重复元素
 function deleteDuplicates(head: ListNode | null): ListNode | null {
